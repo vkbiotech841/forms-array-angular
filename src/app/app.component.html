@@ -2,18 +2,34 @@
   Start editing to see some magic happen :)
 </p>
 
-<div [formGroup]="orderForm">
+<form [formGroup]="orderForm">
   <div formArrayName="items" *ngFor="let item of orderForm.get('items')['controls']; let i = index;">
     <div [formGroupName]="i">
-      <input formControlName="name" placeholder="Item name">
-      <input formControlName="description" placeholder="Item description">
-      <input formControlName="price" placeholder="Item price">
+      <div class="form-control">
+        <input formControlName="name" placeholder="Item name">
+      </div>
+      <div class="form-control">
+        <input formControlName="description" placeholder="Item description">
+      </div>
+      <div class="form-control">
+        <input formControlName="price" placeholder="Item price">
+      </div>
     </div>
-
-    <!-- Chosen name: {{ orderForm.controls.items.controls[i].controls.name.value }} -->
+    <button (click)="removeItem(i)">Remove</button>
   </div>
-</div>
+</form>
+
 <button (click)="addItem()">Add</button>
+<button (click)="getFormValue()">SAVE</button>
+
+<div *ngFor="let formValue of finalFormValue">
+  {{formValue.name}}
+  {{formValue.description}}
+  {{formValue.price}}
+</div>
+
+
+
 
 
 <router-outlet></router-outlet>

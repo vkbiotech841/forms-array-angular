@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -9,8 +9,14 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 export class AppComponent {
   title = 'replicate-forms-angular';
 
-  orderForm: FormGroup;
   items: FormArray;
+
+  orderForm: FormGroup;
+
+  name: FormControl;
+  description: FormControl;
+  price: FormControl;
+
 
   constructor(
     private formBuilder: FormBuilder
@@ -18,18 +24,23 @@ export class AppComponent {
 
 
   ngOnInit() {
-    this.orderForm = new FormGroup({
-      items: new FormArray([])
-    });
+    this.initialForms();
+  }
+
+  initialForms() {
+    this.orderForm = new FormGroup({ items: new FormArray([]) });
   }
 
 
-
   createItem(): FormGroup {
+    this.name = new FormControl("", []);
+    this.description = new FormControl("", []);
+    this.price = new FormControl("", []);
+
     return this.formBuilder.group({
-      name: '',
-      description: '',
-      price: ''
+      name: this.name,
+      description: this.description,
+      price: this.price
     });
   };
 
@@ -37,6 +48,19 @@ export class AppComponent {
   addItem(): void {
     this.items = this.orderForm.get('items') as FormArray;
     this.items.push(this.createItem());
+
+    console.log("items", this.items.controls[0].value,);
   };
+
+  removeItem(index: number) {
+    this.items = this.orderForm.get('items') as FormArray;
+    this.items.removeAt(index);
+  };
+
+  finalFormValue: any[] = [];
+  getFormValue() {
+    this.finalFormValue = this.orderForm.value.items
+    console.log("orderForm", this.orderForm.value.items,);
+  }
 
 }
