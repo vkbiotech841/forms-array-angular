@@ -1,31 +1,32 @@
-<p>
-  Start editing to see some magic happen :)
-</p>
-
-<form [formGroup]="orderForm">
-  <div formArrayName="items" *ngFor="let item of orderForm.get('items')['controls']; let i = index;">
-    <div [formGroupName]="i">
-      <div class="form-control">
-        <input formControlName="name" placeholder="Item name">
+<div class="container">
+  <p>
+    This is an example for angular forms array
+  </p>
+  <form [formGroup]="orderForm">
+    <div formArrayName="items" *ngFor="let item of orderForm.get('items')['controls']; let i = index;">
+      <div [formGroupName]="i">
+        <div>
+          <input formControlName="name" placeholder="Item name" class="form-control">
+        </div>
+        <div>
+          <input formControlName="description" placeholder="Item description" class="form-control">
+        </div>
+        <div>
+          <input formControlName="price" placeholder="Item price" class="form-control">
+        </div>
       </div>
-      <div class="form-control">
-        <input formControlName="description" placeholder="Item description">
-      </div>
-      <div class="form-control">
-        <input formControlName="price" placeholder="Item price">
-      </div>
+      <button class="btn btn-secondary btn-sm" (click)="removeItem(i)">Remove</button>
     </div>
-    <button (click)="removeItem(i)">Remove</button>
+  </form>
+
+  <button class="btn btn-secondary btn-sm" (click)="addItem()">Add</button>
+  <button class="btn btn-secondary btn-sm" (click)="getFormValue()">SAVE</button>
+
+  <div *ngFor="let formValue of finalFormValue">
+    {{formValue.name}}
+    {{formValue.description}}
+    {{formValue.price}}
   </div>
-</form>
-
-<button (click)="addItem()">Add</button>
-<button (click)="getFormValue()">SAVE</button>
-
-<div *ngFor="let formValue of finalFormValue">
-  {{formValue.name}}
-  {{formValue.description}}
-  {{formValue.price}}
 </div>
 
 

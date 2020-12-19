@@ -17,6 +17,8 @@ export class AppComponent {
   description: FormControl;
   price: FormControl;
 
+  finalFormValue: any[] = [];
+
 
   constructor(
     private formBuilder: FormBuilder
@@ -57,10 +59,10 @@ export class AppComponent {
     this.items.removeAt(index);
   };
 
-  finalFormValue: any[] = [];
+
   getFormValue() {
     this.finalFormValue = this.orderForm.value.items
     console.log("orderForm", this.orderForm.value.items,);
-  }
+  };
 
 }
