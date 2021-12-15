@@ -10,9 +10,7 @@ export class AppComponent {
   title = 'replicate-forms-angular';
 
   items: FormArray;
-
   orderForm: FormGroup;
-
   name: FormControl;
   description: FormControl;
   price: FormControl;
@@ -26,15 +24,15 @@ export class AppComponent {
 
 
   ngOnInit() {
-    this.initialForms();
+    this.initialFormsArray();
   }
 
-  initialForms() {
+  initialFormsArray() {
     this.orderForm = new FormGroup({ items: new FormArray([]) });
   }
 
 
-  createItem(): FormGroup {
+  createFormGroupData(): FormGroup {
     this.name = new FormControl("", []);
     this.description = new FormControl("", []);
     this.price = new FormControl("", []);
@@ -49,9 +47,10 @@ export class AppComponent {
 
   addItem(): void {
     this.items = this.orderForm.get('items') as FormArray;
-    this.items.push(this.createItem());
+    this.items.push(this.createFormGroupData());
 
-    console.log("items", this.items.controls[0].value,);
+    // console.log("items of single form group", this.items.controls[0].value,);
+    console.log("items of single form group", this.items.value);
   };
 
   removeItem(index: number) {
@@ -62,7 +61,7 @@ export class AppComponent {
 
   getFormValue() {
     this.finalFormValue = this.orderForm.value.items
-    console.log("orderForm", this.orderForm.value.items,);
+    console.log("finalFormValue", this.orderForm.value.items,);
   };
 
 }

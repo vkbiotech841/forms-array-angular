@@ -3,8 +3,10 @@
     This is an example for angular forms array
   </p>
   <form [formGroup]="orderForm">
+
     <div formArrayName="items" *ngFor="let item of orderForm.get('items')['controls']; let i = index;">
       <div [formGroupName]="i">
+
         <div>
           <input formControlName="name" placeholder="Item name" class="form-control">
         </div>
@@ -14,7 +16,9 @@
         <div>
           <input formControlName="price" placeholder="Item price" class="form-control">
         </div>
+
       </div>
+
       <button class="btn btn-secondary btn-sm" (click)="removeItem(i)">Remove</button>
     </div>
   </form>
