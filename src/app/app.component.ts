@@ -7,15 +7,15 @@ import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'replicate-forms-angular';
+  public title = 'replicate-forms-angular';
 
-  items: FormArray;
-  orderForm: FormGroup;
-  name: FormControl;
-  description: FormControl;
-  price: FormControl;
+  public items: FormArray;
+  public orderForm: FormGroup;
+  public name: FormControl;
+  public description: FormControl;
+  public price: FormControl;
 
-  finalFormValue: any[] = [];
+  public finalFormValue: any[] = [];
 
 
   constructor(
@@ -27,12 +27,12 @@ export class AppComponent {
     this.initialFormsArray();
   }
 
-  initialFormsArray() {
+  public initialFormsArray(): void {
     this.orderForm = new FormGroup({ items: new FormArray([]) });
   }
 
 
-  createFormGroupData(): FormGroup {
+  public createFormGroupData(): FormGroup {
     this.name = new FormControl("", []);
     this.description = new FormControl("", []);
     this.price = new FormControl("", []);
@@ -45,23 +45,22 @@ export class AppComponent {
   };
 
 
-  addItem(): void {
+  public addItem(): void {
     this.items = this.orderForm.get('items') as FormArray;
     this.items.push(this.createFormGroupData());
-
-    // console.log("items of single form group", this.items.controls[0].value,);
     console.log("items of single form group", this.items.value);
   };
 
-  removeItem(index: number) {
+  public removeItem(index: number): void {
     this.items = this.orderForm.get('items') as FormArray;
     this.items.removeAt(index);
   };
 
 
-  getFormValue() {
+  public getFormValue(): void {
     this.finalFormValue = this.orderForm.value.items
-    console.log("finalFormValue", this.orderForm.value.items,);
+    console.log("finalFormValue", this.finalFormValue);
+    console.log("finalFormValue", this.orderForm.value);
   };
 
 }
